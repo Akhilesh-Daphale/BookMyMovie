@@ -1,0 +1,22 @@
+
+.header{
+    background-color: #222;
+    height: 36px;
+    padding: 8px 32px 8px 16px;
+}
+
+.logo{
+    background-color: #ff7f7f;
+    height: 36px;
+    transition: transform 8s;
+    transform-style: preserve-3d;
+    /* transition-timing-function: linear; */
+}
+
+.logo-animate{
+    transform: rotateY(180deg);
+}
+
+.header-btn{
+    float: right;
+}
