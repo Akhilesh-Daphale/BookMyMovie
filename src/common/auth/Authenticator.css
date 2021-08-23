@@ -1,0 +1,36 @@
+.login-modal{
+    width: auto;
+    height: auto;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.formControl {
+    width: 240px;
+}
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.red {
+    color: red;
+}
+
+.register-text{
+    color: grey;
+}

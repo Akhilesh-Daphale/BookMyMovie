@@ -1,10 +1,10 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
-import "./header.css";
+import "./Header.css";
 import logo from "../../assets/logo.svg";
 
 
-function Header() {
+function Header(props) {
     // State for hiding button
     // const[show, setShow] = React.useState(true); 
 
@@ -15,11 +15,15 @@ function Header() {
         }, 8000);
     })
 
+    const showLogin = () => {
+        props.showLoginDialog();
+    }
+
     return (
         <div className="header">
             <img className="logo" src={logo} alt="logo"/>
             {/* Used inline styling because the external styling had no effect on component */}
-            <Button className="header-btn" variant="contained" style={{marginLeft: 10}}>Login</Button>
+            <Button className="header-btn" variant="contained" style={{marginLeft: 10}} onClick={showLogin}>Login</Button>
             <Button className="header-btn" variant="contained" style={{marginLeft: 10}}>Logout</Button>
             <Button className="header-btn" variant="contained" color="primary" style={{marginLeft: 10}}>Book Show</Button>
             {/* 

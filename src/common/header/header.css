@@ -10,7 +10,7 @@
     height: 36px;
     transition: transform 8s;
     transform-style: preserve-3d;
-    /* transition-timing-function: linear; */
+    transition-timing-function: linear;
 }
 
 .logo-animate{
