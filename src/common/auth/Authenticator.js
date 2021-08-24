@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import {Tabs, Tab, FormControl, InputLabel, Input, Button, FormHelperText, Typography} from "@material-ui/core";
+import {Tabs, Tab, FormControl, InputLabel, Input, Button, FormHelperText} from "@material-ui/core";
 import "./Authenticator.css";
 
 
@@ -162,15 +162,15 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input id="username" value={loginUserName} onChange={(event) => {setLoginUserName(event.target.value)}}></Input>
+                    <Input id="username" type="email" value={loginUserName} onChange={(event) => {setLoginUserName(event.target.value)}}></Input>
                     <FormHelperText className={reqLoginUsername}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <FormControl required>
+                <FormControl required className="form-control">
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input id="password" value={loginPassword} onChange={(event) => {setLoginPassword(event.target.value)}}></Input>
+                    <Input id="password" type="password" value={loginPassword} onChange={(event) => {setLoginPassword(event.target.value)}}></Input>
                     <FormHelperText className={reqLoginPassword}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -184,39 +184,39 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="firstname">First Name</InputLabel>
-                    <Input id="firstname" value={firstName} onChange={(event) => {setFirstName(event.target.value)}}></Input>
+                    <Input id="firstname" type="text" value={firstName} onChange={(event) => {setFirstName(event.target.value)}}></Input>
                     <FormHelperText className={reqRegisterFirstName}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <FormControl required>
+                <FormControl required className="form-control">
                     <InputLabel htmlFor="lastname">Last name</InputLabel>
-                    <Input id="lastname" value={lastName} onChange={(event) => {setLastName(event.target.value)}}></Input>
+                    <Input id="lastname" type="text" value={lastName} onChange={(event) => {setLastName(event.target.value)}}></Input>
                     <FormHelperText className={reqRegisterLastName}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <FormControl required>
+                <FormControl required className="form-control">
                     <InputLabel htmlFor="email">Email</InputLabel>
-                    <Input id="email" value={email} onChange={(event) => {setEmail(event.target.value)}}></Input>
+                    <Input id="email" type="email" value={email} onChange={(event) => {setEmail(event.target.value)}}></Input>
                     <FormHelperText className={reqRegisterEmail}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <FormControl required>
+                <FormControl required className="form-control">
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input id="password" value={password} onChange={(event) => {setPassword(event.target.value)}}></Input>
+                    <Input id="password" type="password" value={password} onChange={(event) => {setPassword(event.target.value)}}></Input>
                     <FormHelperText className={reqRegisterPassword}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <FormControl required>
+                <FormControl required className="form-control">
                     <InputLabel htmlFor="contactnumber">Contact No.</InputLabel>
-                    <Input id="contactnumber" value={contactNum} onChange={(event) => {setContactNum(event.target.value)}}></Input>
+                    <Input id="contactnumber" type="text" value={contactNum} onChange={(event) => {setContactNum(event.target.value)}}></Input>
                     <FormHelperText className={reqRegisterContactNum}>
                         <span className="red">Required</span>
                     </FormHelperText>

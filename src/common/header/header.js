@@ -19,13 +19,19 @@ function Header(props) {
         props.showLoginDialog();
     }
 
+    const showBooking = (event) => {
+        props.history.push({
+            pathname: "/bookshow/00ae33e8-a235-11e8-9077-720006ceb890"
+        });        
+    }
+
     return (
         <div className="header">
             <img className="logo" src={logo} alt="logo"/>
             {/* Used inline styling because the external styling had no effect on component */}
             <Button className="header-btn" variant="contained" style={{marginLeft: 10}} onClick={showLogin}>Login</Button>
             <Button className="header-btn" variant="contained" style={{marginLeft: 10}}>Logout</Button>
-            <Button className="header-btn" variant="contained" color="primary" style={{marginLeft: 10}}>Book Show</Button>
+            <Button className="header-btn" variant="contained" color="primary" style={{marginLeft: 10}} onClick={showBooking}>Book Show</Button>
             {/* 
             Logic to hide button
             {show && <Button className="header-btn" variant="contained" color="primary" style={{marginLeft: 10}} onClick={() => setShow(!show)}>Book Show</Button>} 
