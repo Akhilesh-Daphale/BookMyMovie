@@ -4,18 +4,31 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import Authenticator from "../auth/Authenticator";
 import { useParams, useHistory } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+
+// JSS style for button component
+const useStyles = makeStyles({
+    root: {
+        marginLeft: "10px",
+        float: "right"
+    }
+});
 
 
 function Header(props) {
+    // States
     const [showLogin, setShowLogin] = React.useState(false);
     const [showloginButton, setShowLoginButton] = React.useState(false);
     const [showLogoutButton, setShowLogoutButton] = React.useState(false);
     const [showBookShowButton, setShowBookShowButton] = React.useState(false);
     const { id } = useParams();
     const history = useHistory();
+    const classes = useStyles();
 
     React.useEffect(() => {
+        // Hide or show bookSho button depending upon the prop value
         setShowBookShowButton(props.showBookingButton);
+        // Depending upon the access-token key the login or logout button should be displayed
         if(window.sessionStorage.getItem("access-token"))
             showLogoutButtonHandler();
         else
@@ -31,6 +44,7 @@ function Header(props) {
     }
 
     const showBooking = () => {
+        // If user has logged in go to the bookshow page else open the login dialog
         if(window.sessionStorage.getItem("access-token"))
             history.push("/bookshow/" + id);    
         else
@@ -48,13 +62,14 @@ function Header(props) {
     }
 
     const logoutUserHandler = async () => {
+        // Logout the user, if successful logout remove the user-details and access-token keys from session storage.
         try {
             const rawResponse = await fetch(props.baseUrl + "auth/logout", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                    Authorization: "Bearer " + sessionStorage.getItem("access-token")
+                    Authorization: `Bearer ${window.sessionStorage.getItem("access-token")}`
                 }
             });
 
@@ -75,10 +90,10 @@ function Header(props) {
     return (
         <div className="header">
             <img className="logo" src={logo} alt="logo"/>
-            {/* Used inline styling because the external styling had no effect on component */}
-            {showloginButton && <Button className="header-btn" variant="contained" style={{marginLeft: 10}} onClick={showLoginDialogHandler}>Login</Button>}
-            {showLogoutButton && <Button className="header-btn" variant="contained" style={{marginLeft: 10}} onClick={logoutUserHandler}>Logout</Button>}
-            {showBookShowButton && <Button className="header-btn" variant="contained" color="primary" style={{marginLeft: 10}} onClick={showBooking}>Book Show</Button>}
+            {/* Used JSS styling because the margin style had no effect on the buttons*/}
+            {showloginButton && <Button variant="contained" className={classes.root} onClick={showLoginDialogHandler}>Login</Button>}
+            {showLogoutButton && <Button variant="contained" className={classes.root} onClick={logoutUserHandler}>Logout</Button>}
+            {showBookShowButton && <Button variant="contained" color="primary" className={classes.root} onClick={showBooking}>Book Show</Button>}
             <Authenticator 
                 showLoginDialog={showLogin} 
                 hideLoginDialog={hideLoginDialogHandler} 

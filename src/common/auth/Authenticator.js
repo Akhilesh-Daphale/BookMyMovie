@@ -5,6 +5,7 @@ import "./Authenticator.css";
 
 
 function TabPanel(props) {
+    // Children component of the tab, shows them depending upon the tab index and value
     const {children, value, index} = props;
 
     return (
@@ -40,10 +41,12 @@ function Authenticator(props) {
     
 
     const handleChange = (event, newValue) => {
+        // Set the tab value
         setValue(newValue);
     };
 
     const hideLoginDialog = () => {
+        // Clear all the fields and error messages before hiding the dialog
         clearFields();
         clearErrorMessages();
         setSuccessRegisterText("dispNone");
@@ -71,6 +74,8 @@ function Authenticator(props) {
     }
 
     const loginUserHandler = async () => {
+        // Login user, if successful login save the user-details and access-token and hide the login dialog
+        // Show error messages in the input fields if empty while login and return 
         loginUserName === "" ? setReqLoginUsername("dispBlock") : setReqLoginUsername("dispNone");
         loginPassword === "" ? setReqLoginPassword("dispBlock") : setReqLoginPassword("dispNone");
 
@@ -78,7 +83,6 @@ function Authenticator(props) {
             return;
         }
 
-        // login user
         const param = window.btoa(`${loginUserName}:${loginPassword}`);
         try {
             const rawResponse = await fetch(props.baseUrl + "auth/login", {
@@ -86,7 +90,7 @@ function Authenticator(props) {
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json;charset=UTF-8",
-                    authorization: `Basic ${param}`
+                    Authorization: `Basic ${param}`
                 }
             });
 
@@ -107,6 +111,8 @@ function Authenticator(props) {
     }
 
     const registerUserHandler = async () => {
+        // Register user, if successful registration show a registration successful text at the bottom of the dialog
+        // Show error messages in the input fields if empty while registration and return 
         firstName === "" ? setReqRegisterFirstName("dispBlock") : setReqRegisterFirstName("dispNone");
         lastName === "" ? setReqRegisterLastName("dispBlock") : setReqRegisterLastName("dispNone");
         email === "" ? setReqRegisterEmail("dispBlock") : setReqRegisterEmail("dispNone");
@@ -137,7 +143,6 @@ function Authenticator(props) {
             });
 
             const data = await rawResponse.json();
-            console.log("did execute");
 
             if(rawResponse.ok) {
                 setSuccessRegisterText("dispBlock");
@@ -154,16 +159,17 @@ function Authenticator(props) {
 
     return (
         <ReactModal isOpen={props.showLoginDialog} onRequestClose={hideLoginDialog} className="login-modal">
+            {/* Tabs*/}
             <Tabs value={value} onChange={handleChange}>
                 <Tab label="Login"/>
                 <Tab label="Register"/>
             </Tabs>
-            {/* Login */}
+            {/* Login tab children*/}
             <TabPanel value={value} index={0}>
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input id="username" type="email" value={loginUserName} onChange={(event) => {setLoginUserName(event.target.value)}}></Input>
+                    <Input id="username" type="email" value={loginUserName} onChange={(event) => {setLoginUserName(event.target.value)}} />
                     <FormHelperText className={reqLoginUsername}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -171,7 +177,7 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input id="password" type="password" value={loginPassword} onChange={(event) => {setLoginPassword(event.target.value)}}></Input>
+                    <Input id="password" type="password" value={loginPassword} onChange={(event) => {setLoginPassword(event.target.value)}} />
                     <FormHelperText className={reqLoginPassword}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -180,12 +186,12 @@ function Authenticator(props) {
                 <Button variant="contained" color="primary" onClick={loginUserHandler}>Login</Button>
                 <br />
             </TabPanel>
-            {/* Register */}
+            {/* Register tab children */}
             <TabPanel value={value} index={1}>
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="firstname">First Name</InputLabel>
-                    <Input id="firstname" type="text" value={firstName} onChange={(event) => {setFirstName(event.target.value)}}></Input>
+                    <Input id="firstname" type="text" value={firstName} onChange={(event) => {setFirstName(event.target.value)}} />
                     <FormHelperText className={reqRegisterFirstName}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -193,7 +199,7 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="lastname">Last name</InputLabel>
-                    <Input id="lastname" type="text" value={lastName} onChange={(event) => {setLastName(event.target.value)}}></Input>
+                    <Input id="lastname" type="text" value={lastName} onChange={(event) => {setLastName(event.target.value)}} />
                     <FormHelperText className={reqRegisterLastName}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -201,7 +207,7 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="email">Email</InputLabel>
-                    <Input id="email" type="email" value={email} onChange={(event) => {setEmail(event.target.value)}}></Input>
+                    <Input id="email" type="email" value={email} onChange={(event) => {setEmail(event.target.value)}} />
                     <FormHelperText className={reqRegisterEmail}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -209,7 +215,7 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input id="password" type="password" value={password} onChange={(event) => {setPassword(event.target.value)}}></Input>
+                    <Input id="password" type="password" value={password} onChange={(event) => {setPassword(event.target.value)}} />
                     <FormHelperText className={reqRegisterPassword}>
                         <span className="red">Required</span>
                     </FormHelperText>
@@ -217,13 +223,13 @@ function Authenticator(props) {
                 <br />
                 <FormControl required className="form-control">
                     <InputLabel htmlFor="contactnumber">Contact No.</InputLabel>
-                    <Input id="contactnumber" type="text" value={contactNum} onChange={(event) => {setContactNum(event.target.value)}}></Input>
+                    <Input id="contactnumber" type="text" value={contactNum} onChange={(event) => {setContactNum(event.target.value)}} />
                     <FormHelperText className={reqRegisterContactNum}>
                         <span className="red">Required</span>
                     </FormHelperText>
                 </FormControl>
                 <br />
-                <p className={`${successRegisterText} register-text`}>Registration Successful. Please Login!</p>
+                <span className={`${successRegisterText} register-text`}>Registration Successful. Please Login!</span>
                 <br />
                 <Button variant="contained" color="primary" onClick={registerUserHandler}>Register</Button>
                 <br />

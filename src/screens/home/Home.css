@@ -15,11 +15,6 @@
 .released-movies{
     display: flex;
     width: 100%;
-    height: 500px;
-}
-
-.form-control {
-    width: 240px;
 }
 
 .movies-grid{
@@ -30,11 +25,6 @@
 .filter-card{
     flex: 24%;
     margin: 16px;
-}
-
-.filter-input{
-    display: flex;
-    flex-direction: column;
 }
 
 .released-movies-card{

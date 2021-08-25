@@ -10,27 +10,29 @@ import Header from "../../common/header/Header";
 
 function Details(props) {
 
-    const {id} = useParams();
+    const { id } = useParams();
     // Some default values so there is no error while rendering
     const [movieDetails, setMovieDetails] = React.useState({
         artists: [],
         genres: [],
         trailer_url: "https://www.youtube.com/watch?v=2g811Eo7K8U"
     });
+
     const opts = {
         width: "100%",
         playerVars: {
           autoplay: 1,
         },
-      };
+    };
 
     React.useEffect(async () => {
+        // Get the movie details
         const rawResponse = await fetch(props.baseUrl + "movies/" + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Cache-Control": "no-cache",
-                Authorization: "Bearer " + sessionStorage.getItem("access-token")
+                Authorization: `Bearer ${window.sessionStorage.getItem("access-token")}`
             }
         })
 
@@ -43,7 +45,6 @@ function Details(props) {
     }
 
     const videoOnReady = (event) => {
-        // access to player in all event handlers via event.target
         event.target.pauseVideo();
     }
 
@@ -51,41 +52,38 @@ function Details(props) {
         <React.Fragment>
             <Header baseUrl={props.baseUrl} showBookingButton={true} />
             <div className="details-page-container">
+                {/* Left part */}
                 <div className="left-container">
                     <br />
-                    <br />
-                    <Typography>
+                    <Typography component="span">
                         <Link to="/" className="back-btn">&#60; Back to Home</Link>
                     </Typography>
                     <img className="movie-poster" src={movieDetails.poster_url} alt={movieDetails.title + " movie poster"} />
                 </div>
+                {/* Middle part */}
                 <div className="middle-container">
                     <br />
                     <Typography variant="headline" component="h2">
                         {movieDetails.title}
                     </Typography>
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Genre: "}</span>
                         {movieDetails.genres.join(", ")}
                     </Typography>
-                    <br />
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Duration: "}</span>
                         {movieDetails.duration}
                     </Typography>
-                    <br />
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Release Date: "}</span>
                         {new Date(movieDetails.release_date).toDateString()}
                     </Typography>
-                    <br />
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Rating: "}</span>
                         {movieDetails.rating}
                     </Typography>
                     <br />
-                    <br />
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Plot: "}</span>
                         {"("}
                         <Anchor href={movieDetails.wiki_url}>Wiki link</Anchor>
@@ -93,16 +91,18 @@ function Details(props) {
                         {movieDetails.storyline}
                     </Typography>
                     <br />
-                    <br />
-                    <Typography component="span">
+                    <Typography component="p">
                         <span className="bold-text">{"Trailer: "}</span>
                     </Typography>
                     <YouTube videoId={getvideoId(movieDetails.trailer_url)} opts={opts} onReady={videoOnReady} />
+                    <br />
                 </div>
+                {/* Right part */}
                 <div className="right-container">
                     <br />
-                    <br />
-                    <Typography component="legend"><span className="bold-text">Rate this movie:</span></Typography>
+                    <Typography component="legend">
+                        <span className="bold-text">Rate this movie:</span>
+                    </Typography>
                     <Rating
                         defaultValue={0}
                         precision={1}
@@ -110,11 +110,10 @@ function Details(props) {
                     />
                     <br />
                     <br />
-                    {/* The line breaks are because the margin property could not be apllied */}
-                    <Typography component="span">
+                    {/* The line breaks are because the margin property had no effect */}
+                    <Typography component="p">
                         <span className="bold-text artist-text">Artists:</span>
                     </Typography>
-                    <br />
                     <br />
                     <GridList cellHeight={200} cols={2} spacing={10} className="carousel-artists">
                         {
