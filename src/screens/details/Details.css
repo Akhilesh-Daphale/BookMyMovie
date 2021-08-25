@@ -1,0 +1,44 @@
+
+.details-page-container{
+    display: flex;
+    overflow: hidden;
+}
+
+.left-container{
+    flex: 20%;
+}
+
+.middle-container{
+    flex: 60%;
+    line-height: 1.5;
+    margin: 0 10px;
+}
+
+.right-container{
+    flex: 20%;
+    margin: 0 10px;
+}
+
+.back-btn{
+    text-decoration: none;
+    color: black;
+    height: 24px;
+    margin: 8px 0 0 24px;
+    cursor: pointer;
+}
+
+.movie-poster{
+    margin-left: 24px;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.rating-icon{
+    color: black;
+}
+
+.artist-text{
+    margin: 16px 0;
+}
