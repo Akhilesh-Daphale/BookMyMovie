@@ -1,7 +1,6 @@
 import React from 'react';
 import { Fragment } from 'react';
 import Header from "./common/header/Header";
-import Authenticator from "./common/auth/Authenticator";
 import Home from "./screens/home/Home";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import BookShow from "./screens/bookshow/BookShow";
@@ -10,21 +9,17 @@ import Details from "./screens/details/Details";
 
 
 function Controller() {
-    const [showLogin, setShowLogin] = React.useState(false);
     const baseUrl = "/api/v1/";
 
-    const showLoginDialogHandler = () => {
-        setShowLogin(true);
-    }
-
-    const hideLoginDialogHandler = () => {
-        setShowLogin(false);
-    }
+    React.useEffect(() => {
+        // Logo will start rotating after 8 seconds infinitely on y axis
+        setInterval(() => {
+            document.getElementsByClassName("logo")[0].classList.toggle("logo-animate");
+        }, 8000);
+    })
 
     return (
         <Fragment>
-            <Header showLoginDialog={showLoginDialogHandler} />
-            <Authenticator show={showLogin} hideLoginDialog={hideLoginDialogHandler} />
             <Router>
                 <Switch>
                     <Route exact path="/" render={(props) => <Home {...props} baseUrl={baseUrl} />} />

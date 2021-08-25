@@ -3,6 +3,7 @@ import { Card, CardActions, CardContent, GridList, GridListTile, GridListTileBar
 import React from "react";
 import "./Home.css";
 import { useHistory } from "react-router-dom";
+import Header from "../../common/header/Header";
 
 
 function Home(props) {
@@ -151,6 +152,7 @@ function Home(props) {
 
     return (
         <React.Fragment>
+            <Header baseUrl={props.baseUrl} showBookingButton={false}/>
             <h3 className="homepage-header">Upcoming Movies</h3>
             <GridList cellHeight={250} cols={6} className="carousel">
                 {
@@ -166,7 +168,7 @@ function Home(props) {
             </GridList>
             <div className="released-movies">
                 <div className="movies-grid">
-                    <GridList cellHeight={350} cols={3} spacing={20}>
+                    <GridList cellHeight={350} cols={3} spacing={50}>
                         {
                             releasedMoviesFilter.map(movie => {
                                 return (

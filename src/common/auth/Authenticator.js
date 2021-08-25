@@ -43,7 +43,7 @@ function Authenticator(props) {
         setValue(newValue);
     };
 
-    const hideLogin = () => {
+    const hideLoginDialog = () => {
         clearFields();
         clearErrorMessages();
         setSuccessRegisterText("dispNone");
@@ -81,7 +81,7 @@ function Authenticator(props) {
         // login user
         const param = window.btoa(`${loginUserName}:${loginPassword}`);
         try {
-            const rawResponse = await fetch("/api/v1/auth/login", {
+            const rawResponse = await fetch(props.baseUrl + "auth/login", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -94,7 +94,8 @@ function Authenticator(props) {
             if(rawResponse.ok) {
                 window.sessionStorage.setItem('user-details', JSON.stringify(data));
                 window.sessionStorage.setItem('access-token', rawResponse.headers.get('access-token'));
-                hideLogin();
+                hideLoginDialog();
+                props.showLogoutButton();
             } else {
                 const error = new Error();
                 error.message = data.message || 'Something went wrong.';
@@ -126,7 +127,7 @@ function Authenticator(props) {
         }
 
         try {
-            const rawResponse = await fetch("/api/v1/signup", {
+            const rawResponse = await fetch(props.baseUrl + "signup", {
                 body: JSON.stringify(params),
                 method: "POST",
                 headers: {
@@ -152,7 +153,7 @@ function Authenticator(props) {
     } 
 
     return (
-        <ReactModal isOpen={props.show} onRequestClose={hideLogin} className="login-modal">
+        <ReactModal isOpen={props.showLoginDialog} onRequestClose={hideLoginDialog} className="login-modal">
             <Tabs value={value} onChange={handleChange}>
                 <Tab label="Login"/>
                 <Tab label="Register"/>
